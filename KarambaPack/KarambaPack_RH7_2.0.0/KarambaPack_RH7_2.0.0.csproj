@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F06F493A-CDA0-48E6-8935-72B58965E953}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KarambaPack</RootNamespace>
+    <AssemblyName>KarambaPack_daq</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GH_IO">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Rhino 7\Plug-ins\Grasshopper\GH_IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Grasshopper">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Rhino 7\Plug-ins\Grasshopper\Grasshopper.dll</HintPath>
+    </Reference>
+    <Reference Include="karambaCommon">
+      <HintPath>..\..\..\..\..\Otros\karamba references\Karamba rh 7 2.0.0\karambaCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="karamba">
+      <HintPath>..\..\..\..\..\Otros\karamba references\Karamba rh 7 2.0.0\karamba.gha</HintPath>
+    </Reference>
+    <Reference Include="RhinoCommon">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Rhino 7\System\RhinoCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\KarambaPack_RH6_1.3.3\KarambaPackInfo.cs">
+      <Link>KarambaPackInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\KarambaPack_RH6_2.0.0\Kar01_LCombos.cs">
+      <Link>Kar01_LCombos.cs</Link>
+    </Compile>
+    <Compile Include="..\KarambaPack_RH6_2.0.0\Kar02_MMass.cs">
+      <Link>Kar02_MMass.cs</Link>
+    </Compile>
+    <Compile Include="..\KarambaPack_RH6_2.0.0\Kar03_LCA.cs">
+      <Link>Kar03_LCA.cs</Link>
+    </Compile>
+    <Compile Include="..\KarambaPack_RH6_2.0.0\Others.cs">
+      <Link>Others.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KarambaPack_Common\KarambaPack_Common.csproj">
+      <Project>{f65300a4-1762-457c-a6c3-77ffca0a0c97}</Project>
+      <Name>KarambaPack_Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>Copy "$(TargetPath)" "C:\Users\diego\OneDrive\Projects\Grasshopper\KarambaPack\Plugin Files\Rhino 7\Karamba 2.0.0\KarambaPack_daq.gha"
+Copy "$(TargetPath)" "C:\Program Files\Rhino 7\Plug-ins\Karamba\$(TargetName).gha"
+Copy "$(TargetPath)" "$(TargetDir)\$(TargetName).gha"
+Erase "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

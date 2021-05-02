@@ -1,0 +1,8 @@
+C:\Users\diego\OneDrive\Projects\Visual Studio\Projects\KarambaPack\Icons\bin\Release\KarambaPack_Common.dll
+C:\Users\diego\OneDrive\Projects\Visual Studio\Projects\KarambaPack\Icons\bin\Release\KarambaPack_Common.pdb
+C:\Users\diego\OneDrive\Projects\Visual Studio\Projects\KarambaPack\Icons\obj\Release\KarambaPack_Common.csprojAssemblyReference.cache
+C:\Users\diego\OneDrive\Projects\Visual Studio\Projects\KarambaPack\Icons\obj\Release\KarambaPack_Common.Properties.Resources.resources
+C:\Users\diego\OneDrive\Projects\Visual Studio\Projects\KarambaPack\Icons\obj\Release\KarambaPack_Common.csproj.GenerateResource.cache
+C:\Users\diego\OneDrive\Projects\Visual Studio\Projects\KarambaPack\Icons\obj\Release\KarambaPack_Common.csproj.CoreCompileInputs.cache
+C:\Users\diego\OneDrive\Projects\Visual Studio\Projects\KarambaPack\Icons\obj\Release\KarambaPack_Common.dll
+C:\Users\diego\OneDrive\Projects\Visual Studio\Projects\KarambaPack\Icons\obj\Release\KarambaPack_Common.pdb

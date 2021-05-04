@@ -1,5 +1,5 @@
 # Karamba Package by Diego Apellániz
-This repository contains the extension plugin „KarambaPack“ for the Grasshopper plugin Karamba3d, which offers additional functionalities to this structural analysis tool (see examples). It also contains example files and the source code. Click on „Releases“ to download the last version.
+This repository contains the extension plugin „KarambaPack“ for the Grasshopper plugin [Karamba3d](https://www.karamba3d.com/), which offers additional functionalities to this structural analysis tool (see examples). It also contains example files and the source code. Click on „Releases“ to download the last version.
 
 ## How to install
 Download the plugin and save both the .gha and the common .dll file in the same folder where the plugin Karamba is installed (C:\Program Files\Rhino xx\Plugins\Karamba). Also check that the both files are not being blocked.

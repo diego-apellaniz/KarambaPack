@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Karamba.Models;
 using Karamba.GHopper.Models;
 using Karamba.GHopper.Loads;
@@ -7,6 +8,7 @@ using Karamba.Elements;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 using Karamba.Loads;
+using Karamba.Utilities;
 
 
 // In order to load the result of this wizard, you will also need to
@@ -78,7 +80,7 @@ namespace KarambaPack
             //int index0 = 0;
 
             //Output parameters:
-            var newModel = new Karamba.Models.Model();
+            //var newModel = new Karamba.Models.Model();
             var myGHLoads = new List<GH_Load>();
 
             //Other variables:            
@@ -260,9 +262,7 @@ namespace KarambaPack
                             }
                         }
                     }
-
                 }
-
             }
 
             // Loop through all gravity loads
@@ -281,11 +281,13 @@ namespace KarambaPack
             }
 
 
+
             // Create list of loads from loads stored in dictionaries
             foreach (var item in PLoads)
             {
                 myLoads.Add(item.Value);
                 myGHLoads.Add(new GH_Load(item.Value));
+
             }
             foreach (var item in ULoads)
             {
@@ -302,30 +304,38 @@ namespace KarambaPack
                 myLoads.Add(item.Value);
                 myGHLoads.Add(new GH_Load(item.Value));
             }
+            var gravities = new Dictionary<int, GravityLoad>();
             foreach (var item in GLoads)
             {
                 myLoads.Add(item);
                 myGHLoads.Add(new GH_Load(item));
-            }
 
+                gravities.Add(item.loadcase, item);
+            }
             //Assemble new Model!!
             foreach (Karamba.Nodes.Node node in model.nodes)
-
             {
                 oldPoints.Add(node.pos);
             }
-            foreach (Karamba.Elements.ModelElement elem in model.elems)
-
+            //var elem_id2ind_ = new Karamba.Utilities.ID IdMapper();
+            foreach (Karamba.Elements.ModelElement elem in model.elems)                
             {
                 //elem.cloneBuilderElement();
                 //var myGrass = elem.clonedGrassElement();
-
+                elem.cloneBuilderElement();
                 BuilderElement myGrass = elem.clonedBuilderElement();
                 Grass.Add(myGrass);
             }
 
+            ModelBuilder modelBuilder = new ModelBuilder(0.0001);
+
+            MessageLogger messageLogger = new MessageLogger();
+            model.cloneElements();
+
+
             GH_RuntimeMessageLevel gH_RuntimeMessageLevel = GH_RuntimeMessageLevel.Blank;
-            AssembleModel.solve(oldPoints, Grass, model.supports, myLoads, model.crosecs, model.materials, model.beamsets, model.joints, 0.01, out newModel, out info, out mass, out cdg, out msg, out runtime_warning);
+            AssembleModel.solve(oldPoints, Grass, model.supports, myLoads, model.in_crosecs, model.in_materials, model.beamsets, model.joints, 0.005, out var newModel, out info, out mass, out cdg, out msg, out runtime_warning);
+
 
             if (runtime_warning)
             {
@@ -341,6 +351,7 @@ namespace KarambaPack
             }
 
             // Finally assign output parameters.
+            //DA.SetData(0, new GH_Model(newModel));
             DA.SetData(0, new GH_Model(newModel));
             DA.SetDataList(1, myGHLoads);
         }

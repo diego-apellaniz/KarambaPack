@@ -317,7 +317,7 @@ namespace KarambaPack
             }
 
             GH_RuntimeMessageLevel gH_RuntimeMessageLevel = GH_RuntimeMessageLevel.Blank;
-            AssembleModel.solve(oldPoints, Grass, model.supports, myLoads, model.crosecs, model.materials, model.beamsets, model.joints, 0.01, out newModel, out info, out mass, out cdg, out msg, out runtime_warning);
+            AssembleModel.solve(oldPoints, Grass, model.supports, myLoads, model.in_crosecs, model.in_materials, model.beamsets, model.joints, 0.005, out newModel, out info, out mass, out cdg, out msg, out runtime_warning);
 
             if (runtime_warning)
             {

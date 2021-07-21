@@ -26,7 +26,7 @@ namespace KarambaPack
             get
             {
                 //Return a short string describing the purpose of this GHA library.
-                return "";
+                return "New components to exmpand the functionalities of the Karamba3d Plugin";
             }
         }
         public override Guid Id
@@ -42,7 +42,7 @@ namespace KarambaPack
             get
             {
                 //Return a string identifying you or your company.
-                return "";
+                return "Diego Apellániz";
             }
         }
         public override string AuthorContact
@@ -50,7 +50,15 @@ namespace KarambaPack
             get
             {
                 //Return a string representing your preferred contact details.
-                return "";
+                return "dapellanizq@gmail.com";
+            }
+        }
+
+        public override string AssemblyVersion
+        {
+            get
+            {
+                return "1.0.1";
             }
         }
     }

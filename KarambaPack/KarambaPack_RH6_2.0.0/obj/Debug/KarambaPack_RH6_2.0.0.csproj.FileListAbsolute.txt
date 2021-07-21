@@ -20,3 +20,4 @@ C:\Users\diego\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_RH6_2
 C:\Users\diego\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_RH6_2.0.0\obj\Debug\KarambaPack_RH6_2.0.0.csproj.CopyComplete
 C:\Users\diego\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_RH6_2.0.0\obj\Debug\KarambaPack_daq.dll
 C:\Users\diego\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_RH6_2.0.0\obj\Debug\KarambaPack_daq.pdb
+C:\Users\diego\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_RH6_2.0.0\bin\Debug\System.ValueTuple.dll

@@ -143,7 +143,6 @@ namespace KarambaPack
                 //GrassElement myGrass = elem.clonedGrassElement();
                 BuilderElement myGrass = elem.clonedBuilderElement();
                 Grass.Add(myGrass);
-                Grass.Add(myGrass);
             }
             foreach (Karamba.Loads.Load load in model.gravities.Values)
             {

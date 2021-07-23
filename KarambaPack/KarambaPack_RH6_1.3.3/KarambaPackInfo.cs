@@ -13,6 +13,7 @@ namespace KarambaPack
                 return "KarambaPack";
             }
         }
+
         public override Bitmap Icon
         {
             get
@@ -21,6 +22,7 @@ namespace KarambaPack
                 return null;
             }
         }
+
         public override string Description
         {
             get
@@ -29,6 +31,7 @@ namespace KarambaPack
                 return "New components to exmpand the functionalities of the Karamba3d Plugin";
             }
         }
+
         public override Guid Id
         {
             get
@@ -45,6 +48,7 @@ namespace KarambaPack
                 return "Diego Apellániz";
             }
         }
+
         public override string AuthorContact
         {
             get
@@ -58,7 +62,7 @@ namespace KarambaPack
         {
             get
             {
-                return "1.0.1";
+                return "1.0.3";
             }
         }
     }

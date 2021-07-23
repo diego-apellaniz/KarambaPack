@@ -86,6 +86,8 @@ namespace KarambaPack
             var cdg = new Karamba.Geometry.Point3();
             //var GHmess = new GH_RuntimeMessageLevel();
             bool runtime_warning = false;
+            // warnings
+            var msg_list = new List<string>();
 
             // Then we need to access the input parameters individually. 
             // When data cannot be extracted from a parameter, we should abort this method.
@@ -113,6 +115,7 @@ namespace KarambaPack
             // Loop through all point loads
             foreach (Karamba.Loads.PointLoad load in model.ploads)
             {
+                  load.CheckLoadIndex(ref msg_list); // check that load case id is an integer
                     //myTuple1: LCombo, LCase
                     //myTuple2: LCombo, Node
                     var myTuple1 = new Tuple<int, string>(0, load.LcName);

@@ -45,5 +45,18 @@ namespace KarambaPack
             }
             return LFactors;
         }
+
+
+        public static void CheckLoadIndex(this Karamba.Loads.Load load, ref List<string> msg_list)
+        {
+            if (!int.TryParse(load.LcName, out int index))
+            {
+                msg_list.Add($"Check definition of Load Case {load.LcName}. Load Case id must be an integer.");
+            }
+        }
+
+
+
+
     }
 }

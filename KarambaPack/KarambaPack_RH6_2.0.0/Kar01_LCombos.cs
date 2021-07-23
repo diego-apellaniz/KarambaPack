@@ -123,10 +123,12 @@ namespace KarambaPack
             model.clonePointLoads();
             //Get Load Factors from the definitions of the Load Combinations
             var LFactors = new Dictionary<Tuple<int, string>, double>(Others.dictLFactors(combos));
-            // Define new loads!!
+            // CHek load indexes
+            var msg_list = new List< string > ();
             // Loop through all point loads
             foreach (Karamba.Loads.PointLoad load in model.ploads)
             {
+                load.CheckLoadIndex(ref msg_list); // check that load case id is an integer
                 for (int i = 0; i<combos.Count; i++)
                 {
                     //myTuple1: LCombo, LCase
@@ -158,6 +160,7 @@ namespace KarambaPack
             // Loop through all element loads
             foreach (Karamba.Loads.ElementLoad eload in model.eloads)
             {
+                eload.CheckLoadIndex(ref msg_list); // check that load case id is an integer
                 // Loop through all uniform loads
                 if (eload is Karamba.Loads.Beam.ConcentratedForce)
                 {
@@ -527,6 +530,7 @@ namespace KarambaPack
             // Loop through all gravity loads
             foreach (var load in model.gravities)
             {
+                load.Value.CheckLoadIndex(ref msg_list); // check that load case id is an integer
                 for (int i = 0; i < combos.Count; i++)
                 {
                     //myTuple1: LCombo, LCase
@@ -644,6 +648,14 @@ namespace KarambaPack
             // Finally assign output parameters.
             DA.SetData(0, new GH_Model(newModel));
             DA.SetDataList(1, myGHLoads);
+
+            if (msg_list.Count>0)
+            {
+                foreach (var m in msg_list)
+                {
+                    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, m);
+                }                
+            }
         }
                 
         /// <summary>

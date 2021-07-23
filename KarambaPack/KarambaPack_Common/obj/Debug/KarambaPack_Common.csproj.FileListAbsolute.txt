@@ -6,3 +6,11 @@ C:\Users\diego\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_Commo
 C:\Users\diego\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_Common\obj\Debug\KarambaPack_Common.csproj.CoreCompileInputs.cache
 C:\Users\diego\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_Common\obj\Debug\KarambaPack_Common.dll
 C:\Users\diego\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_Common\obj\Debug\KarambaPack_Common.pdb
+D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_Common\bin\Debug\KarambaPack_Common.dll
+D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_Common\bin\Debug\KarambaPack_Common.pdb
+D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_Common\obj\Debug\KarambaPack_Common.csprojAssemblyReference.cache
+D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_Common\obj\Debug\KarambaPack_Common.Properties.Resources.resources
+D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_Common\obj\Debug\KarambaPack_Common.csproj.GenerateResource.cache
+D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_Common\obj\Debug\KarambaPack_Common.csproj.CoreCompileInputs.cache
+D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_Common\obj\Debug\KarambaPack_Common.dll
+D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_Common\obj\Debug\KarambaPack_Common.pdb

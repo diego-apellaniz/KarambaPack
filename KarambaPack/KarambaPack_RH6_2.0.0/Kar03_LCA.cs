@@ -95,11 +95,12 @@ namespace KarambaPack
             var model_nodes = model.nodes;
 
             //Do stuff
-            model.dp = (ModelDisp)model.dp.Clone();
+            model.dp = (ModelDisplay)model.dp.Clone();
             model.dp.beam = new BeamDisplay();
-            model.dp.beam.displayCrosssection = true;
+            model.dp.beam.fillCSF = true;
+            //model.dp.beam.displayCrosssection = true;
             model.dp.shell = new ShellDisplay();
-            model.dp.shell.displayCrosssection = true;
+            //model.dp.shell.displayCrosssection = true;
             //model.dp.shell.displayCrosssectionThickness = true;
 
             List<IMesh> list = new List<IMesh>();
@@ -110,39 +111,39 @@ namespace KarambaPack
             // Get rendered elements
             List<GH_Mesh> list_beam_meshes = new List<GH_Mesh>();
             List<GH_Mesh> list_shell_meshes = new List<GH_Mesh>();
-            model.dp.collectRenderedBeamMesh(model, model.lc_super_model_results, list2, ref legend_tags, ref legend_colors);
-            foreach (IMesh item in list2)
-            {
-                if (item != null)
-                {
-                    Mesh3 mesh = item as Mesh3;
-                    if (mesh != null)
-                    {
-                        list_beam_meshes.Add(new GH_Mesh(((IReadonlyMesh)mesh).Convert()));
-                    }
-                    else if (item is RhinoMesh)
-                    {
-                        list_beam_meshes.Add(new GH_Mesh(((IReadonlyMesh)mesh).Convert()));
-                    }
-                }
-            }
-            model.dp.collectRenderedShellMesh(model, model.lc_super_model_results, model.dp.shell.layerInd, list, ref legend_tags, ref legend_colors);            
-            if (list.Count % 6 != 0) // Add caps to meshes
-            {
-                throw new ArgumentException("Number of meshes is uneven: capping of boundary not possible");
-            }
-            for (int i = 0; i < list.Count*2/3-1; i += 2)
-            {
-                Mesh3 mesh = Mesh3.CapMesh(list[i], list[i + 1]);
-                mesh.ComputeNormals();
+            //model.dp.collectRenderedBeamMesh(model, model.lc_super_model_results, list2, ref legend_tags, ref legend_colors);
+            //foreach (IMesh item in list2)
+            //{
+            //    if (item != null)
+            //    {
+            //        Mesh3 mesh = item as Mesh3;
+            //        if (mesh != null)
+            //        {
+            //            list_beam_meshes.Add(new GH_Mesh(((IReadonlyMesh)mesh).Convert()));
+            //        }
+            //        else if (item is RhinoMesh)
+            //        {
+            //            list_beam_meshes.Add(new GH_Mesh(((IReadonlyMesh)mesh).Convert()));
+            //        }
+            //    }
+            //}
+            //model.dp.collectRenderedShellMesh(model, model.lc_super_model_results, model.dp.shell.layerInd, list, ref legend_tags, ref legend_colors);            
+            //if (list.Count % 6 != 0) // Add caps to meshes
+            //{
+            //    throw new ArgumentException("Number of meshes is uneven: capping of boundary not possible");
+            //}
+            //for (int i = 0; i < list.Count*2/3-1; i += 2)
+            //{
+            //    Mesh3 mesh = Mesh3.CapMesh(list[i], list[i + 1]);
+            //    mesh.ComputeNormals();
 
-                var outMesh = new Mesh();
-                outMesh.Append(((IReadonlyMesh)list[i]).Convert());
-                outMesh.Append(((IReadonlyMesh)mesh).Convert());
-                outMesh.Append(((IReadonlyMesh)list[i + 1]).Convert());
-                GH_Mesh item = new GH_Mesh(outMesh);
-                list_shell_meshes.Add(item);
-            }
+            //    var outMesh = new Mesh();
+            //    outMesh.Append(((IReadonlyMesh)list[i]).Convert());
+            //    outMesh.Append(((IReadonlyMesh)mesh).Convert());
+            //    outMesh.Append(((IReadonlyMesh)list[i + 1]).Convert());
+            //    GH_Mesh item = new GH_Mesh(outMesh);
+            //    list_shell_meshes.Add(item);
+            //}
 
             // Get outputs materials and masses
             var countBeam = 0;
@@ -166,7 +167,7 @@ namespace KarambaPack
                 if (beam_element != null)
                 {
                     //Add mesh to output
-                    outMeshes.Add(list_beam_meshes[countBeam], mat_path);
+                    //outMeshes.Add(list_beam_meshes[countBeam], mat_path);
                     // Add mass to output
                     var nodes = model_nodes.Where(x => model_element.node_inds.Contains(x.ind)).ToList();
                     var node_1 = nodes.Where(x => x.ind == model_element.node_inds[0]).ToList()[0];
@@ -183,7 +184,7 @@ namespace KarambaPack
                     if(shell_element != null)
                     {
                         //Add mesh to output
-                        outMeshes.Add(list_shell_meshes[countShell], mat_path);
+                        //outMeshes.Add(list_shell_meshes[countShell], mat_path);
                         // Add mass to output
                         double vol = 0.0;
                         for (int i = 0; i < shell_element.mesh.Faces.Count; i++)
@@ -198,10 +199,10 @@ namespace KarambaPack
                 }
             }
 
-            if (outMeshes.DataCount != outMasses.DataCount)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Output lists have different lenghts");
-            }
+            //if (outMeshes.DataCount != outMasses.DataCount)
+            //{
+            //    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Output lists have different lenghts");
+            //}
 
             // Finally assign output parameters.
             DA.SetDataList(0, materials);            

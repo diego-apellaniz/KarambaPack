@@ -84,11 +84,11 @@ namespace KarambaPack
             var PLoads = new Dictionary<Tuple<int, int>, Karamba.Loads.PointLoad>();
             var ULoads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.ConcentratedForce>();
             var U2Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.ConcentratedMoment>();
-            var U3Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.ConstantForce>();
-            var U4Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.ConstantMoment>();
+            //var U3Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.DistributedForce>();
+            //var U4Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.DistributedMoment>();
             var U5Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.Imperfection>();
-            var U6Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.PolylinearForce>();
-            var U7Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.PolylinearMoment>();
+            var U6Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.DistributedForce>();
+            var U7Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.DistributedMoment>();
             var U8Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.TranslationalGap>();
             var U9Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.RotationalGap>();
             var U10Loads = new Dictionary<Tuple<int, List<string>>, Karamba.Loads.Beam.UniformlyDistLoad_OLD>();
@@ -174,13 +174,13 @@ namespace KarambaPack
                             if (ULoads.ContainsKey(myTuple2))
                             {
                                    
-                                ULoads[myTuple2] = new Karamba.Loads.Beam.ConcentratedForce(ULoads[myTuple2].ElementIds, i.ToString(), ULoads[myTuple2].Position,
+                                ULoads[myTuple2] = new Karamba.Loads.Beam.ConcentratedForce(ULoads[myTuple2].ElementIds, ULoads[myTuple2].ElementGuids, i.ToString(), ULoads[myTuple2].Position,
                                                                                         ULoads[myTuple2].Values + LFactors[myTuple1] * load.Values,
                                                                                         ULoads[myTuple2].LoadOrientation);
                             }
                             else
                             {
-                                var myLoad = new Karamba.Loads.Beam.ConcentratedForce(load.ElementIds, i.ToString(), load.Position, LFactors[myTuple1] * load.Values,
+                                var myLoad = new Karamba.Loads.Beam.ConcentratedForce(load.ElementIds, load.ElementGuids, i.ToString(), load.Position, LFactors[myTuple1] * load.Values,
                                                                                         load.LoadOrientation);
                                 ULoads.Add(myTuple2, myLoad);
                             }
@@ -198,73 +198,73 @@ namespace KarambaPack
                             var myTuple2 = new Tuple<int, List<string>>(i, load.ElementIds);
                             if (U2Loads.ContainsKey(myTuple2))
                             {
-                                U2Loads[myTuple2] = new Karamba.Loads.Beam.ConcentratedMoment(U2Loads[myTuple2].ElementIds, i.ToString(), U2Loads[myTuple2].Position,
+                                U2Loads[myTuple2] = new Karamba.Loads.Beam.ConcentratedMoment(U2Loads[myTuple2].ElementIds, U2Loads[myTuple2].ElementGuids, i.ToString(), U2Loads[myTuple2].Position,
                                                                                         U2Loads[myTuple2].Values + LFactors[myTuple1] * load.Values,
                                                                                         U2Loads[myTuple2].LoadOrientation);
                             }
                             else
                             {
-                                var myLoad = new Karamba.Loads.Beam.ConcentratedMoment(load.ElementIds, i.ToString(), load.Position, LFactors[myTuple1] * load.Values,
+                                var myLoad = new Karamba.Loads.Beam.ConcentratedMoment(load.ElementIds, load.ElementGuids, i.ToString(), load.Position, LFactors[myTuple1] * load.Values,
                                                                                         load.LoadOrientation);
                                 U2Loads.Add(myTuple2, myLoad);
                             }
                         }
                     }
                 }
-                else if (eload is Karamba.Loads.Beam.ConstantForce)
-                {
-                    Karamba.Loads.Beam.ConstantForce load = (Karamba.Loads.Beam.ConstantForce)eload;
-                    for (int i = 0; i < combos.Count; i++)
-                    {
-                        var myTuple1 = new Tuple<int, string>(i, load.LcName);
-                        if (LFactors.ContainsKey(myTuple1))
-                        {
-                            var myTuple2 = new Tuple<int, List<string>>(i, load.ElementIds);
-                            if (U3Loads.ContainsKey(myTuple2))
-                            {
-                                U3Loads[myTuple2] = new Karamba.Loads.Beam.ConstantForce(U3Loads[myTuple2].ElementIds, i.ToString(),
-                                                                                        U3Loads[myTuple2].LoadOrientation, U3Loads[myTuple2].Direction,
-                                                                                        U3Loads[myTuple2].Value + LFactors[myTuple1] * load.Value,
-                                                                                        U3Loads[myTuple2].Start, U3Loads[myTuple2].End
-                                                                                        );
-                            }
-                            else
-                            {
-                                var myLoad = new Karamba.Loads.Beam.ConstantForce(load.ElementIds, i.ToString(), load.LoadOrientation, load.Direction,
-                                                                                 LFactors[myTuple1] * load.Value, load.Start, load.End
-                                                                                        );
-                                U3Loads.Add(myTuple2, myLoad);
-                            }
-                        }
-                    }
-                }
-                else if (eload is Karamba.Loads.Beam.ConstantMoment)
-                {
-                    Karamba.Loads.Beam.ConstantMoment load = (Karamba.Loads.Beam.ConstantMoment)eload;
-                    for (int i = 0; i < combos.Count; i++)
-                    {
-                        var myTuple1 = new Tuple<int, string>(i, load.LcName);
-                        if (LFactors.ContainsKey(myTuple1))
-                        {
-                            var myTuple2 = new Tuple<int, List<string>>(i, load.ElementIds);
-                            if (U4Loads.ContainsKey(myTuple2))
-                            {
-                                U4Loads[myTuple2] = new Karamba.Loads.Beam.ConstantMoment(U4Loads[myTuple2].ElementIds, i.ToString(),
-                                                                                        U4Loads[myTuple2].LoadOrientation, U4Loads[myTuple2].Direction,
-                                                                                        U4Loads[myTuple2].Value + LFactors[myTuple1] * load.Value,
-                                                                                        U4Loads[myTuple2].Start, U4Loads[myTuple2].End
-                                                                                        );
-                            }
-                            else
-                            {
-                                var myLoad = new Karamba.Loads.Beam.ConstantMoment(load.ElementIds, i.ToString(), load.LoadOrientation, load.Direction,
-                                                                                 LFactors[myTuple1] * load.Value, load.Start, load.End
-                                                                                        );
-                                U4Loads.Add(myTuple2, myLoad);
-                            }
-                        }
-                    }
-                }
+                //else if (eload is Karamba.Loads.Beam.ConstantForce)
+                //{
+                //    Karamba.Loads.Beam.ConstantForce load = (Karamba.Loads.Beam.ConstantForce)eload;
+                //    for (int i = 0; i < combos.Count; i++)
+                //    {
+                //        var myTuple1 = new Tuple<int, string>(i, load.LcName);
+                //        if (LFactors.ContainsKey(myTuple1))
+                //        {
+                //            var myTuple2 = new Tuple<int, List<string>>(i, load.ElementIds);
+                //            if (U3Loads.ContainsKey(myTuple2))
+                //            {
+                //                U3Loads[myTuple2] = new Karamba.Loads.Beam.ConstantForce(U3Loads[myTuple2].ElementIds, i.ToString(),
+                //                                                                        U3Loads[myTuple2].LoadOrientation, U3Loads[myTuple2].Direction,
+                //                                                                        U3Loads[myTuple2].Value + LFactors[myTuple1] * load.Value,
+                //                                                                        U3Loads[myTuple2].Start, U3Loads[myTuple2].End
+                //                                                                        );
+                //            }
+                //            else
+                //            {
+                //                var myLoad = new Karamba.Loads.Beam.ConstantForce(load.ElementIds, i.ToString(), load.LoadOrientation, load.Direction,
+                //                                                                 LFactors[myTuple1] * load.Value, load.Start, load.End
+                //                                                                        );
+                //                U3Loads.Add(myTuple2, myLoad);
+                //            }
+                //        }
+                //    }
+                //}
+                //else if (eload is Karamba.Loads.Beam.ConstantMoment)
+                //{
+                //    Karamba.Loads.Beam.ConstantMoment load = (Karamba.Loads.Beam.ConstantMoment)eload;
+                //    for (int i = 0; i < combos.Count; i++)
+                //    {
+                //        var myTuple1 = new Tuple<int, string>(i, load.LcName);
+                //        if (LFactors.ContainsKey(myTuple1))
+                //        {
+                //            var myTuple2 = new Tuple<int, List<string>>(i, load.ElementIds);
+                //            if (U4Loads.ContainsKey(myTuple2))
+                //            {
+                //                U4Loads[myTuple2] = new Karamba.Loads.Beam.ConstantMoment(U4Loads[myTuple2].ElementIds, i.ToString(),
+                //                                                                        U4Loads[myTuple2].LoadOrientation, U4Loads[myTuple2].Direction,
+                //                                                                        U4Loads[myTuple2].Value + LFactors[myTuple1] * load.Value,
+                //                                                                        U4Loads[myTuple2].Start, U4Loads[myTuple2].End
+                //                                                                        );
+                //            }
+                //            else
+                //            {
+                //                var myLoad = new Karamba.Loads.Beam.ConstantMoment(load.ElementIds, i.ToString(), load.LoadOrientation, load.Direction,
+                //                                                                 LFactors[myTuple1] * load.Value, load.Start, load.End
+                //                                                                        );
+                //                U4Loads.Add(myTuple2, myLoad);
+                //            }
+                //        }
+                //    }
+                //}
                 else if (eload is Karamba.Loads.Beam.Imperfection)
                 {
                     Karamba.Loads.Beam.Imperfection load = (Karamba.Loads.Beam.Imperfection)eload;
@@ -292,9 +292,9 @@ namespace KarambaPack
                         }
                     }
                 }
-                else if (eload is Karamba.Loads.Beam.PolylinearForce)
+                else if (eload is Karamba.Loads.Beam.DistributedForce)
                 {
-                    Karamba.Loads.Beam.PolylinearForce load = (Karamba.Loads.Beam.PolylinearForce)eload;
+                    Karamba.Loads.Beam.DistributedForce load = (Karamba.Loads.Beam.DistributedForce)eload;
                     for (int i = 0; i < combos.Count; i++)
                     {
                         var myTuple1 = new Tuple<int, string>(i, load.LcName);
@@ -310,7 +310,7 @@ namespace KarambaPack
                                 {
                                     values.Add(values0[j] + values1[j]);
                                 }
-                                U6Loads[myTuple2] = new Karamba.Loads.Beam.PolylinearForce(U6Loads[myTuple2].ElementIds, i.ToString(),
+                                U6Loads[myTuple2] = new Karamba.Loads.Beam.DistributedForce(U6Loads[myTuple2].ElementIds, U6Loads[myTuple2].ElementGuids, i.ToString(),
                                                                                         U6Loads[myTuple2].LoadOrientation, U6Loads[myTuple2].Direction,
                                                                                         U6Loads[myTuple2].Positions.ToList(),
                                                                                         values
@@ -318,7 +318,7 @@ namespace KarambaPack
                             }
                             else
                             {
-                                var myLoad = new Karamba.Loads.Beam.PolylinearForce(load.ElementIds, i.ToString(), load.LoadOrientation, load.Direction,
+                                var myLoad = new Karamba.Loads.Beam.DistributedForce(load.ElementIds, load.ElementGuids, i.ToString(), load.LoadOrientation, load.Direction,
                                                                                     load.Positions.ToList(),
                                                                                    load.Values.Select(x => LFactors[myTuple1] * x).ToList()
                                                                                         );
@@ -327,9 +327,9 @@ namespace KarambaPack
                         }
                     }
                 }
-                else if (eload is Karamba.Loads.Beam.PolylinearMoment)
+                else if (eload is Karamba.Loads.Beam.DistributedMoment)
                 {
-                    Karamba.Loads.Beam.PolylinearMoment load = (Karamba.Loads.Beam.PolylinearMoment)eload;
+                    Karamba.Loads.Beam.DistributedMoment load = (Karamba.Loads.Beam.DistributedMoment)eload;
                     for (int i = 0; i < combos.Count; i++)
                     {
                         var myTuple1 = new Tuple<int, string>(i, load.LcName);
@@ -345,7 +345,7 @@ namespace KarambaPack
                                 {
                                     values.Add(values0[j] + values1[j]);
                                 }
-                                U7Loads[myTuple2] = new Karamba.Loads.Beam.PolylinearMoment(U7Loads[myTuple2].ElementIds, i.ToString(),
+                                U7Loads[myTuple2] = new Karamba.Loads.Beam.DistributedMoment(U7Loads[myTuple2].ElementIds, U7Loads[myTuple2].ElementGuids, i.ToString(),
                                                                                         U7Loads[myTuple2].LoadOrientation, U7Loads[myTuple2].Direction,
                                                                                         U7Loads[myTuple2].Positions.ToList(),
                                                                                         values
@@ -353,7 +353,7 @@ namespace KarambaPack
                             }
                             else
                             {
-                                var myLoad = new Karamba.Loads.Beam.PolylinearMoment(load.ElementIds, i.ToString(), load.LoadOrientation, load.Direction,
+                                var myLoad = new Karamba.Loads.Beam.DistributedMoment(load.ElementIds, load.ElementGuids, i.ToString(), load.LoadOrientation, load.Direction,
                                                                                     load.Positions.ToList(),
                                                                                    load.Values.Select(x => LFactors[myTuple1] * x).ToList()
                                                                                         );
@@ -362,14 +362,14 @@ namespace KarambaPack
                         }
                     }
                 }
-                else if (eload is Karamba.Loads.Beam.TrapezoidalForce)
-                {
-                    throw new ArgumentException("Trapezoidal loads not supported.");
-                }
-                else if (eload is Karamba.Loads.Beam.TrapezoidalMoment)
-                {
-                    throw new ArgumentException("Trapezoidal loads not supported.");
-                }
+                //else if (eload is Karamba.Loads.Beam.TrapezoidalForce)
+                //{
+                //    throw new ArgumentException("Trapezoidal loads not supported.");
+                //}
+                //else if (eload is Karamba.Loads.Beam.TrapezoidalMoment)
+                //{
+                //    throw new ArgumentException("Trapezoidal loads not supported.");
+                //}
                 else if (eload is Karamba.Loads.Beam.TranslationalGap)
                 {
                     Karamba.Loads.Beam.TranslationalGap load = (Karamba.Loads.Beam.TranslationalGap)eload;
@@ -381,7 +381,7 @@ namespace KarambaPack
                             var myTuple2 = new Tuple<int, List<string>>(i, load.ElementIds);
                             if (U8Loads.ContainsKey(myTuple2))
                             {
-                                U8Loads[myTuple2] = new Karamba.Loads.Beam.TranslationalGap(U8Loads[myTuple2].ElementIds, i.ToString(),
+                                U8Loads[myTuple2] = new Karamba.Loads.Beam.TranslationalGap(U8Loads[myTuple2].ElementIds, U8Loads[myTuple2].ElementGuids, i.ToString(),
                                                                                         U8Loads[myTuple2].Position,
                                                                                         U8Loads[myTuple2].Values + LFactors[myTuple1] * load.Values, 
                                                                                         U8Loads[myTuple2].LoadOrientation
@@ -389,7 +389,7 @@ namespace KarambaPack
                             }
                             else
                             {
-                                var myLoad = new Karamba.Loads.Beam.TranslationalGap(load.ElementIds, i.ToString(),
+                                var myLoad = new Karamba.Loads.Beam.TranslationalGap(load.ElementIds, load.ElementGuids, i.ToString(),
                                                                                     load.Position,
                                                                                    load.Values*LFactors[myTuple1],
                                                                                    load.LoadOrientation
@@ -410,7 +410,7 @@ namespace KarambaPack
                             var myTuple2 = new Tuple<int, List<string>>(i, load.ElementIds);
                             if (U9Loads.ContainsKey(myTuple2))
                             {
-                                U9Loads[myTuple2] = new Karamba.Loads.Beam.RotationalGap(U9Loads[myTuple2].ElementIds, i.ToString(),
+                                U9Loads[myTuple2] = new Karamba.Loads.Beam.RotationalGap(U9Loads[myTuple2].ElementIds, U9Loads[myTuple2].ElementGuids, i.ToString(),
                                                                                         U9Loads[myTuple2].Position,
                                                                                         U9Loads[myTuple2].Values + LFactors[myTuple1] * load.Values,
                                                                                         U9Loads[myTuple2].LoadOrientation
@@ -418,7 +418,7 @@ namespace KarambaPack
                             }
                             else
                             {
-                                var myLoad = new Karamba.Loads.Beam.RotationalGap(load.ElementIds, i.ToString(),
+                                var myLoad = new Karamba.Loads.Beam.RotationalGap(load.ElementIds, load.ElementGuids, i.ToString(), 
                                                                                     load.Position,
                                                                                    load.Values * LFactors[myTuple1],
                                                                                    load.LoadOrientation
@@ -559,16 +559,16 @@ namespace KarambaPack
                 myLoads.Add(item.Value);
                 myGHLoads.Add(new GH_Load(item.Value));
             }
-            foreach (var item in U3Loads)
-            {
-                myLoads.Add(item.Value);
-                myGHLoads.Add(new GH_Load(item.Value));
-            }
-            foreach (var item in U4Loads)
-            {
-                myLoads.Add(item.Value);
-                myGHLoads.Add(new GH_Load(item.Value));
-            }
+            //foreach (var item in U3Loads)
+            //{
+            //    myLoads.Add(item.Value);
+            //    myGHLoads.Add(new GH_Load(item.Value));
+            //}
+            //foreach (var item in U4Loads)
+            //{
+            //    myLoads.Add(item.Value);
+            //    myGHLoads.Add(new GH_Load(item.Value));
+            //}
             foreach (var item in U5Loads)
             {
                 myLoads.Add(item.Value);

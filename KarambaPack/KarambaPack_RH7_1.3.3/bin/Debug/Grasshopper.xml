@@ -8938,6 +8938,20 @@ Nechť již hříšné saxofony ďáblů rozzvučí síň úděsnými tóny walt
  Enabled documents respond to events and display their previews in the Rhino viewport. 
  </summary>
 </member>
+<member name="M:Grasshopper.Kernel.GH_Document.RunningAsCommand">
+ <summary>
+ When the document is being solved inside the context of an executing
+ Rhino command, this function will return the command instance. Under
+ normal operation of Grasshopper in the traditional sense, this function
+ will return null. The document executes as a command when inside of the
+ grasshopper player or as a compiled grasshopper player based command.
+ The way to run a GH_Document as a command is to call the
+ GH_RhinoScriptInterface.RunAsCommand function
+ </summary>
+ <returns>
+ executing command when running as a command; otherwise null
+ </returns>
+</member>
 <member name="P:Grasshopper.Kernel.GH_Document.Context">
  <summary>
  Gets or sets the context for this document. Note that the context is not a state so much as an action. 
@@ -28816,6 +28830,16 @@ Nechť již hříšné saxofony ďáblů rozzvučí síň úděsnými tóny walt
  <returns>A preview bitmap on success or null on failure. 
  Caller is responsible for disposing of the image.</returns>
 </member>
+<member name="M:Grasshopper.Kernel.GH_DocumentIO.GetDocumentIcon(System.String,System.Drawing.Size)">
+ <summary>
+ Try and extract the icon image of a document. Not all gh/ghx files contain an icon 
+ so this function may return null. The document itself is not loaded and rendered, so the
+ icon really has to be part of the file already.
+ </summary>
+ <param name="filePath">Filepath to examine.</param>
+ <returns>An icon bitmap on success or null on failure. 
+ Caller is responsible for disposing of the image.</returns>
+</member>
 <member name="P:Grasshopper.Kernel.GH_DocumentIO.DisableOverwriteProtection">
  <summary>
  Gets or sets whether the file overwrite protection dialog ought to be
@@ -45669,6 +45693,16 @@ Nechť již hříšné saxofony ďáblů rozzvučí síň úděsnými tóny walt
  Gets or sets whether Grasshopper document solutions are wrapped in undo records.
  </summary>
 </member>
+<member name="P:Grasshopper.CentralSettings.PanelDefaultFontFamily">
+ <summary>
+ Gets or sets the font family name of the default font for panels.
+ </summary>
+</member>
+<member name="P:Grasshopper.CentralSettings.PanelDefaultFontSize">
+ <summary>
+ Gets or sets the font family name of the default font for panels.
+ </summary>
+</member>
 <member name="P:Grasshopper.CentralSettings.CreateSolutionUndoRecord">
  <summary>
  Gets or sets whether Grasshopper document solutions are wrapped in undo records.
@@ -45877,6 +45911,11 @@ Nechť již hříšné saxofony ďáblů rozzvučí síň úděsnými tóny walt
 <member name="E:Grasshopper.CentralSettings.ComponentCascadeMenusChanged">
  <summary>
  Raised whenever the ComponentCascadeMenus setting changes.
+ </summary>
+</member>
+<member name="E:Grasshopper.CentralSettings.PanelDefaultFontChanged">
+ <summary>
+ Raised whenever the PanelDefaultFontFamily or PanelDefaultFontSize settings change.
  </summary>
 </member>
 <member name="E:Grasshopper.CentralSettings.CreateSolutionUndoRecordChanged">

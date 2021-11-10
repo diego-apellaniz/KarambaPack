@@ -25,7 +25,6 @@ D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_
 D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_RH7_2.0.0\bin\Debug\karambaCommon.dll
 D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_RH7_2.0.0\bin\Debug\KarambaPack_Common.dll
 D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_RH7_2.0.0\bin\Debug\System.ValueTuple.dll
-D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_RH7_2.0.0\bin\Debug\Newtonsoft.Json.dll
 D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_RH7_2.0.0\bin\Debug\KarambaPack_Common.pdb
 D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_RH7_2.0.0\obj\Debug\KarambaPack_RH7_2.0.0.csprojAssemblyReference.cache
 D:\Users\dapellaniz\OneDrive\Projects\Repos\KarambaPack\KarambaPack\KarambaPack_RH7_2.0.0\obj\Debug\KarambaPack_RH7_2.0.0.csproj.CoreCompileInputs.cache

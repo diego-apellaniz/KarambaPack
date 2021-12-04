@@ -1,7 +1,7 @@
 # Karamba Package by Diego Apellániz
 This repository contains the extension plugin „KarambaPack“ for the Grasshopper plugin [Karamba3d](https://www.karamba3d.com/), which offers additional functionalities to this structural analysis tool (see examples). It also contains example files and the source code. Click on „Releases“ to download the last version.
 
-⚠️⚠️ ### Shutdown
+### Shutdown ⚠️⚠️⚠️
 After the official release of Karamba3d v2.2.0, I've decided to stop the development of this project. Karamba will implement Load Combinations very soon and the new Karamba Component “Model Query” already replaces my component for LCA. I hope it doesn’t cause too much trouble to your workflows. I just can’t find time to update the plugin after each Karamba release. Thank you very much for your support all this time!
 - Diego Apellániz
 
